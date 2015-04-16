@@ -7,6 +7,12 @@
 	<packaging>pom</packaging>
 	<name>webstat</name>
 
+	<scm>
+		<connection>scm:git:git://github.com/SoulZxz/goldmine.git</connection>
+		<developerConnection>scm:git:git@github.com:SoulZxz/goldmine.git</developerConnection>
+		<url>https://github.com/SoulZxz/goldmine</url>
+	</scm>
+
 	<properties>
 		<project.version>1.0.0</project.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,10 +22,10 @@
 	</properties>
 
 	<repositories>
-		<!--repository>
+		<repository>
 			<id>repo-mirror</id>
 			<url>http://maven.net.cn/content/groups/public/</url>
-		</repository>  -->
+		</repository>
 		<repository>
 			<id>central</id>
 			<name>Maven Repository Switchboard</name>
@@ -47,11 +53,10 @@
 	</repositories>
 
 	<pluginRepositories>
-		<!-- 
 		<pluginRepository>
 			<id>plugin-repo-mirror</id>
 			<url>http://maven.net.cn/content/groups/public/</url>
-		</pluginRepository>  -->
+		</pluginRepository>
 		<pluginRepository>
 			<id>maven2-repository.dev.java.net</id>
 			<name>Java.net Repository for Maven</name>
