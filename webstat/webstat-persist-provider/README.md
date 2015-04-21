@@ -1,0 +1,1 @@
+Currently only PageView and UseFunction persistent interfaces are defined.
