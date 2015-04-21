@@ -16,6 +16,6 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 		class="com.goldmine.webstat.provider.impl.PlainfileTrafficLogPersistService" />
 
 	<bean name="serverHost" class="java.lang.String">
-		<constructor-arg value="http://113.108.232.136" />
+		<constructor-arg value="http://localhost:8080" />
 	</bean>
 </beans>
