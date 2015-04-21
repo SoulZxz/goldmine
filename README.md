@@ -3,20 +3,25 @@ These projects serve as the foundation for web tracking. If you want to build yo
 
 Below are the descriptions for each project, see readme in each project for details.
 
-webstat-model
+<p>webstat-model</p>
 The core model for web tracking.
 
-webstat-persist-provider
+
+<p>webstat-persist-provider</p>
 The interface for web tracking data persistent.
 
-webstat-persist-provider-x
+
+<p>webstat-persist-provider-x</p>
 The implementations of webstat-persist-provider.
 
-webstat-interceptor
+
+<p>webstat-interceptor</p>
 If your application is java based and your major concern is pageview, use this interceptor.
 
-webstat-interceptor-sample
+
+<p>webstat-interceptor-sample</p>
 An example for webstat-interceptor application.
 
-webstat-api
+
+<p>webstat-api</p>
 A simple web traffic data collecting app.
