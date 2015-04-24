@@ -14,7 +14,7 @@ public class PlainfileTrafficLogPersistService implements TrafficLogPersistServi
 	private Log log = LogFactory.getLog(PlainfileTrafficLogPersistService.class);
 
 	private Gson gson = new GsonBuilder().disableHtmlEscaping()
-			.setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+			.setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
 	public void logPageView(PageView pageView) {
 		log.info(gson.toJson(pageView));
