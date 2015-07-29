@@ -20,6 +20,8 @@ public class UserActionContext {
 
 	private String referrer;
 
+	private String referrerName;
+
 	private String ip;
 
 	private Date timestamp;
@@ -68,6 +70,14 @@ public class UserActionContext {
 
 	public void setReferrer(String referrer) {
 		this.referrer = referrer;
+	}
+
+	public String getReferrerName() {
+		return referrerName;
+	}
+
+	public void setReferrerName(String referrerName) {
+		this.referrerName = referrerName;
 	}
 
 	public String getIp() {

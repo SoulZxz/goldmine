@@ -70,8 +70,11 @@ public class StatAPIController extends BaseController {
 	@RequestMapping(value = "customEvent/{event}", method = { RequestMethod.GET, RequestMethod.POST }, produces = MediaType.IMAGE_PNG_VALUE)
 	@ResponseBody
 	public byte[] logCustomEvent(UserActionContext userActionContext, @PathVariable String event,
-			@RequestParam(required = true) String appId, @RequestParam(required = false) String vars) {
+			@RequestParam(required = true) String appId,
+			@RequestParam(required = true) String pageName,
+			@RequestParam(required = false) String vars) {
 		userActionContext.setAppId(appId);
+		userActionContext.setReferrerName(pageName);
 
 		String pageUrl = userActionContext.getReferrer();
 		URLComponent component = urlUtils.extractComponent(pageUrl);

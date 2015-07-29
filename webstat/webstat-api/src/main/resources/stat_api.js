@@ -1,6 +1,7 @@
 var webStat = {
 	logCustomEvent: function(event, vars) {
-		var customEventDummySrc = "${host}/webstat/api/customEvent/" + event + "?appId=${appId}&rnd=" + Math.random();
+		var pageName = document.title;
+		var customEventDummySrc = "${host}/webstat/api/customEvent/" + event + "?appId=${appId}&pageName=" + encodeURIComponent(pageName) + "&rnd=" + Math.random();
 		if(vars != undefined && vars != '') {
 			customEventDummySrc += "&vars=" + encodeURIComponent(vars);
 		}

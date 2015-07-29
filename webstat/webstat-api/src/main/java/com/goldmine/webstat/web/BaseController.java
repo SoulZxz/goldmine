@@ -46,6 +46,8 @@ public abstract class BaseController {
 
 	public static final String PARA_AD_TAG = "_adTag";
 
+	public static final String PARA_PAGE_NAME = "_pageName";
+
 	@Autowired
 	@Qualifier("serverHost")
 	private String serverAddress;
@@ -86,9 +88,11 @@ public abstract class BaseController {
 			@RequestHeader(value = "x-forwarded-for", required = false) String clientIp,
 			@CookieValue(value = "openId", required = false) String openId,
 			@RequestParam(value = PARA_CAMPAIGN, required = false) String campaign,
-			@RequestParam(value = PARA_AD_TAG, required = false) String adTag) {
+			@RequestParam(value = PARA_AD_TAG, required = false) String adTag,
+			@RequestParam(value = PARA_PAGE_NAME, required = false) String pageName) {
 		UserActionContext userActionContext = new UserActionContext();
 		userActionContext.setReferrer(referer);
+		userActionContext.setReferrerName(pageName);
 		userActionContext.setUserAgent(userAgent);
 		userActionContext.setTimestamp(new Date());
 		userActionContext.setCampaign(campaign);
