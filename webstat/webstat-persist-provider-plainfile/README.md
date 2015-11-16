@@ -1,0 +1,1 @@
+The persistent service implementation with plain log file.

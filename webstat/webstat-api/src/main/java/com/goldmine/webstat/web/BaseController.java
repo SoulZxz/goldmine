@@ -25,13 +25,6 @@ import com.goldmine.webstat.bean.ServerHost;
 import com.goldmine.webstat.model.UserActionContext;
 import com.goldmine.webstat.model.UserIdType;
 
-/**
- * <p>
- * 基础控制器，系统错误屏障，提供通用的异常 -> http响应 映射处理
- * </p>
- * 
- * @author zhaoxuanzhang 2013-09-12
- */
 public abstract class BaseController {
 
 	public static final String TEXT_HTML_TYPE = "text/html; charset=UTF-8";
@@ -71,7 +64,7 @@ public abstract class BaseController {
 	}
 
 	private void informAdmin(Throwable ex) {
-		// TODO 发送错误报告
+		// TODO send error report
 		ex.printStackTrace();
 	}
 
@@ -87,6 +80,7 @@ public abstract class BaseController {
 			@RequestHeader(value = "User-Agent", required = false) String userAgent,
 			@RequestHeader(value = "x-forwarded-for", required = false) String clientIp,
 			@CookieValue(value = "openId", required = false) String openId,
+			@CookieValue(value = "customerId", required = false) String customerId,
 			@RequestParam(value = PARA_CAMPAIGN, required = false) String campaign,
 			@RequestParam(value = PARA_AD_TAG, required = false) String adTag,
 			@RequestParam(value = PARA_PAGE_NAME, required = false) String pageName) {
@@ -101,8 +95,11 @@ public abstract class BaseController {
 		// reverse proxy header first
 		String effectiveClientIp = this.getEffectiveClientIp(request.getRemoteAddr(), clientIp);
 
-		// setup User Id, use openId if availiable
-		if (StringUtils.isNotBlank(openId)) {
+		// setup User Id, use customerId if availiable
+		if (StringUtils.isNotBlank(customerId)) {
+			userActionContext.setUserIdType(UserIdType.CUSTOMER_ID);
+			userActionContext.setUserId(customerId);
+		} else if (StringUtils.isNotBlank(openId)) {
 			userActionContext.setUserIdType(UserIdType.WEIXIN_OPENID);
 			userActionContext.setUserId(openId);
 		} else {

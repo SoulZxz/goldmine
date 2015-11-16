@@ -1,0 +1,1 @@
+See webstat-interceptor-sample for an example.
