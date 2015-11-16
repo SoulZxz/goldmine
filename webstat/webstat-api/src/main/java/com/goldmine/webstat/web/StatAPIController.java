@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +38,10 @@ public class StatAPIController extends BaseController {
 			@RequestParam(required = true) String appId) {
 		StringBuilder script = new StringBuilder();
 
+		script.append(fileUtils.readFileAsString("stat_api.js"));
 		if (logPv) {
 			script.append(fileUtils.readFileAsString("report_pv.js"));
 		}
-		script.append(fileUtils.readFileAsString("stat_api.js"));
 
 		String hostChanged = StringUtils.replace(script.toString(), "${host}",
 				serverHost.getAddress());
@@ -67,7 +66,7 @@ public class StatAPIController extends BaseController {
 		return "";
 	}
 
-	@RequestMapping(value = "customEvent/{event}", method = { RequestMethod.GET, RequestMethod.POST }, produces = MediaType.IMAGE_PNG_VALUE)
+	@RequestMapping(value = "customEvent/{event}", method = { RequestMethod.GET, RequestMethod.POST }, produces = "text/javascript")
 	@ResponseBody
 	public byte[] logCustomEvent(UserActionContext userActionContext, @PathVariable String event,
 			@RequestParam(required = true) String appId,

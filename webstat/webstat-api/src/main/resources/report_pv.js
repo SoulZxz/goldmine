@@ -8,9 +8,6 @@ var logPvSrc = "${host}/webstat/api/logPv?appId=${appId}"
     + ((_campaign == "" || _campaign == null) ? "" : "&_campaign=" + _campaign)   
     + ((_adTag == "" || _adTag == null) ? "" : "&_adTag=" + _adTag);
 
-var logPvScript = "<script src=\"" + logPvSrc + "\" ></script>";
-document.write(logPvScript);
-
 function _getParameterByName(name) {
 	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
 	var regexS = "[\\?&]" + name + "=([^&#]*)";
@@ -20,4 +17,13 @@ function _getParameterByName(name) {
 		return "";
 	else
 		return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+if (document.head) {
+    loadScript(logPvSrc);
+}
+else {
+    document.addEventListener("DOMContentLoaded", function() {
+        loadScript(logPvSrc)
+    }, false );
 }

@@ -5,13 +5,13 @@ var webStat = {
 		if(vars != undefined && vars != '') {
 			customEventDummySrc += "&vars=" + encodeURIComponent(vars);
 		}
-		var img = document.createElement("img");
-		img.src = customEventDummySrc;
-		img.width = "0";
-		img.height = "0";
-		img.alt = "Page view tracker";
-		var st = img.style;
-   		st.display = "none";
-		document.body.appendChild(img);
+		loadScript(customEventDummySrc)
 	}
 };
+
+function loadScript (url){
+    var script = document.createElement ("script");
+    script.type = "text/javascript";
+    script.src = url;
+    document.head.appendChild(script);
+}
