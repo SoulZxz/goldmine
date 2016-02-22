@@ -16,12 +16,11 @@
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">
 			<bean
-				class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="objectMapper">
-					<bean class="org.codehaus.jackson.map.ObjectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
 						<property name="serializationInclusion">
-							<value
-								type="org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion">NON_NULL</value>
+							<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
 						</property>
 					</bean>
 				</property>
