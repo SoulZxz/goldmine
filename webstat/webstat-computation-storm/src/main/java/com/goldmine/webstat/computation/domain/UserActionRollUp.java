@@ -209,10 +209,10 @@ public class UserActionRollUp {
 	}
 
 	public String usageTrait() {
-		return "UserActionRollUp [referrer=" + referrer + ", appId=" + appId + ", campaign="
-				+ campaign + ", adTag=" + adTag + ", fromDate=" + fromDate + ", toDate=" + toDate
-				+ ", timeframe=" + timeframe + ", actionType=" + actionType + ", uri=" + uri
-				+ ", contentUrl=" + contentUrl + ", function=" + function + "]";
+		return "UserActionRollUp [appId=" + appId + ", campaign=" + campaign + ", adTag=" + adTag
+				+ ", fromDate=" + fromDate + ", toDate=" + toDate + ", timeframe=" + timeframe
+				+ ", actionType=" + actionType + ", uri=" + uri + ", contentUrl=" + contentUrl
+				+ ", function=" + function + "]";
 	}
 
 	public String usersTrait() {
