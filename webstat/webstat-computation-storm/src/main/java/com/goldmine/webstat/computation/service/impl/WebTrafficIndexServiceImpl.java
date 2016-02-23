@@ -69,6 +69,9 @@ public class WebTrafficIndexServiceImpl implements WebTrafficIndexService {
 		usageRollUp.setTimeframe(timeframe.toString());
 		usageRollUp.setFromDate(start);
 		usageRollUp.setToDate(end);
+		// 清除 referrer和queryString
+		usageRollUp.setReferrer(null);
+		usageRollUp.setQueryString(null);
 
 		String targetId = DataDigester.digest(usageRollUp.usageTrait());
 
