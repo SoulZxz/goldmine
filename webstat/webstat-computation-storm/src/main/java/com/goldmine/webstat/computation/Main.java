@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
-import org.apache.storm.utils.Utils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.goldmine.webstat.computation.serializer.PageViewSerializer;
@@ -16,12 +15,11 @@ import com.goldmine.webstat.model.UserActionContext;
 import com.goldmine.webstat.model.UserActionType;
 import com.goldmine.webstat.model.UserIdType;
 
-public class LocalRunner {
+public class Main {
 
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext xmlCtx = new ClassPathXmlApplicationContext();
-		xmlCtx.setConfigLocation("spring-conf/spring-test.xml");
-		xmlCtx.getEnvironment().setActiveProfiles("test");
+		xmlCtx.setConfigLocation("spring-conf/spring.xml");
 		xmlCtx.refresh();
 
 		Config conf = new Config();
@@ -36,9 +34,6 @@ public class LocalRunner {
 
 		LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology("test", conf, TopologyBuilderFactory.getBuilder().createTopology());
-		Utils.sleep(120000);
-		cluster.killTopology("test");
-		cluster.shutdown();
 	}
 
 }

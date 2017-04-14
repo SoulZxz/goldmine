@@ -2,16 +2,14 @@ package com.goldmine.webstat.computation.component.bolt;
 
 import java.util.Map;
 
-import backtype.storm.task.OutputCollector;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Tuple;
-import backtype.storm.tuple.Values;
+import org.apache.storm.task.OutputCollector;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Tuple;
 
 import com.goldmine.webstat.computation.component.WebTrafficNameDef;
 import com.goldmine.webstat.computation.service.WebTrafficIndexService;
-import com.goldmine.webstat.model.PageView;
 
 public class PageViewPersist extends WebTrafficDataBolt {
 
@@ -24,19 +22,19 @@ public class PageViewPersist extends WebTrafficDataBolt {
 	}
 
 	@Override
-	public void execute(Tuple input) {
-		WebTrafficIndexService service = this.getWebTrafficIndexService();
-
-		PageView pageView = this.getPageView(input);
-		service.saveUserActionFact(pageView);
-
-		collector.emit(input, new Values(pageView));
-		collector.ack(input);
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		declarer.declare(new Fields(WebTrafficNameDef.PAGE_VIEW));
 	}
 
 	@Override
-	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields(WebTrafficNameDef.PAGE_VIEW));
+	protected Object getRawReturn(Tuple input) {
+		return this.getPageView(input);
+	}
+
+	@Override
+	protected void safeExecute(Tuple input) {
+		WebTrafficIndexService service = this.getWebTrafficIndexService();
+		service.saveUserActionFact(this.getPageView(input));
 	}
 
 }

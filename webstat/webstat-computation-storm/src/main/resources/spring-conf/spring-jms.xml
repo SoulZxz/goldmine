@@ -19,6 +19,7 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="factDataMessageQueue" />
 		<property name="messageListener" ref="factDataMessageListener" />
+		<property name="concurrentConsumers" value="30"></property>
 		<property name="sessionTransacted" value="true" />
 	</bean>
 

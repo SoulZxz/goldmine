@@ -2,12 +2,11 @@ package com.goldmine.webstat.computation.component.bolt;
 
 import java.util.Map;
 
-import backtype.storm.task.OutputCollector;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Tuple;
-import backtype.storm.tuple.Values;
+import org.apache.storm.task.OutputCollector;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Tuple;
 
 import com.goldmine.webstat.computation.bean.TimeFrame;
 import com.goldmine.webstat.computation.component.WebTrafficNameDef;
@@ -29,19 +28,21 @@ public class PVCount extends WebTrafficDataBolt {
 	}
 
 	@Override
-	public void execute(Tuple input) {
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		declarer.declare(new Fields(WebTrafficNameDef.PAGE_VIEW));
+	}
+
+	@Override
+	protected Object getRawReturn(Tuple input) {
+		return this.getPageView(input);
+	}
+
+	@Override
+	protected void safeExecute(Tuple input) {
 		WebTrafficIndexService service = this.getWebTrafficIndexService();
 
 		PageView pageView = this.getPageView(input);
 		service.updateUserActionIndex(pageView, timeFrame);
-
-		collector.emit(input, new Values(pageView));
-		collector.ack(input);
-	}
-
-	@Override
-	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields(WebTrafficNameDef.PAGE_VIEW));
 	}
 
 }

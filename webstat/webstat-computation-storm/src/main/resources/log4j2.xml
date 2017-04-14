@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Don't forget to set system property -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector 
+	to make all loggers asynchronous. -->
+<Configuration status="ERROR">
+	<Appenders>
+		<!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+		<RollingRandomAccessFile name="RollingFile"
+			fileName="logs/webstat.log" filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz"
+			immediateFlush="true" append="true">
+			<PatternLayout>
+				<Pattern>${hostName}[%d [%t] %p %c %m %ex]%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="20 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingRandomAccessFile>
+
+		<RollingRandomAccessFile name="debugRollingFile"
+			fileName="logs/debug.log" filePattern="logs/$${date:yyyy-MM}/debug-%d{MM-dd-yyyy}-%i.log.gz"
+			immediateFlush="true" append="true">
+			<PatternLayout>
+				<Pattern>${hostName}[%d [%t] %p %c %m %ex]%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="20 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingRandomAccessFile>
+
+		<!-- ${hostName}[%d [%t] %-5level %logger{36} - %msg]%n -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${hostName}[%d [%t] %p %c %m %ex]%n" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<Logger level="error" includeLocation="true">
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+		<Root level="info" includeLocation="true">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="debugRollingFile" />
+		</Root>
+	</Loggers>
+
+</Configuration>

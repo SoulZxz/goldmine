@@ -1,7 +1,7 @@
 package com.goldmine.webstat.computation.component.spout;
 
-import backtype.storm.spout.SpoutOutputCollector;
-import backtype.storm.topology.base.BaseRichSpout;
+import org.apache.storm.spout.SpoutOutputCollector;
+import org.apache.storm.topology.base.BaseRichSpout;
 
 import com.goldmine.webstat.computation.provider.FactDataProvider;
 import com.goldmine.webstat.computation.utils.ApplicationContextHolder;

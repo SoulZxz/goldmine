@@ -8,6 +8,7 @@ import javax.jms.MessageListener;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.goldmine.webstat.model.PageView;
@@ -15,6 +16,7 @@ import com.goldmine.webstat.model.UseFunction;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+@Profile("default")
 @Component
 public class FactDataJMSListener implements MessageListener {
 
